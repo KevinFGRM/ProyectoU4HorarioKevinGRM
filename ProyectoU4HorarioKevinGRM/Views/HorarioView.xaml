@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ProyectoU4HorarioKevin.Views.HorarioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProyectoU4HorarioKevin.Views" 
+             xmlns:viewmodels="clr-namespace:ProyectoU4HorarioKevin.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Background="White"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HorarioViewModel}" >
+    <Grid Background="Azure">
+        <DockPanel>
+            <TextBlock Text="Mi Horario" DockPanel.Dock="Top" TextAlignment="Center" FontSize="40" FontFamily="Times New Roman" Foreground="DarkRed"></TextBlock>
+            <ComboBox DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding DiasSemana}" SelectedItem="{Binding DiaSeleccionado}"></ComboBox>
+            <DataGrid Margin="5" DockPanel.Dock="Top" ItemsSource="{Binding ClasesFiltradas}" SelectionMode="Extended" SelectedItem="{Binding Clase}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" IsReadOnly="True" HeadersVisibility="Column" RowHeaderWidth="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width=".5*" Header="Nombre" Binding="{Binding Nombre}" />
+                    <DataGridTextColumn Width=".5*" Header="Maestro" Binding="{Binding Maestro}" />
+                    <DataGridTextColumn Width=".5*" Header="Aula" Binding="{Binding Aula}" />
+                    <DataGridTextColumn Width=".5*" Header="Descripcion" Binding="{Binding Descripcion}" />
+                    <DataGridTextColumn Width=".5*" Header="Hora Inicio" Binding="{Binding HoraInicio, StringFormat='t'}" />
+                    <DataGridTextColumn Width=".5*" Header="Hora Fin" Binding="{Binding HoraFin, StringFormat='t'}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Margin="5" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Button Foreground="Blue" BorderThickness="0" Background="Transparent" Margin="5" Content="Editar Clase" Height="30" Command="{Binding CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Vistas.EditarC}"></Button>
+                <Button Foreground="Blue" BorderThickness="0" Background="Transparent" Margin="5" Grid.Column="1" Content="Editar Actividad" Height="30" Command="{Binding CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Vistas.EditarA}"></Button>
+                <Button Foreground="Blue" BorderThickness="0" Background="Transparent" Margin="5" Grid.Column="2" Height="30" Content="Agregar Clase" Command="{Binding CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Vistas.AgregarC}"></Button>
+                <Button Foreground="Blue" BorderThickness="0" Background="Transparent" Margin="5" Grid.Column="3" Height="30" Content="Agregar Actividad" Command="{Binding CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Vistas.AgregarA}"></Button>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>
